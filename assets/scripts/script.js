@@ -8,8 +8,8 @@ var forecastDiv = document.getElementById("forecast");
 var API_KEY = "f9289c267f86d4d0b1e4031ca530ba8c";
 
 // Hide current weather and forecast initially
-currentWeatherDiv.classList.add("hidden");
-forecastDiv.classList.add("hidden");
+currentWeatherDiv.classList.add("hidden"); // Show current weather
+forecastDiv.classList.add("hidden"); // Show forecast
 
 // Event listener for search button click
 searchButton.addEventListener("click", function () {
