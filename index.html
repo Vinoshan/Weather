@@ -2,8 +2,57 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather API</title>
+    <title>Weather Dashboard</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./assets/styles/styles.css" />
   </head>
-  <body></body>
+  <body>
+    <header class="bg-dark text-white p-4">
+      <h1 class="text-center">Weather Dashboard</h1>
+    </header>
+
+    <main class="container mt-4">
+      <section>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="city-input"
+                placeholder="Enter a city" />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="search-button">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="card" id="current-weather">
+              <div class="card-body"></div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card" id="forecast">
+              <div class="card-body"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="./assets/scripts/script.js"></script>
+  </body>
 </html>
