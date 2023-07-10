@@ -39,8 +39,8 @@ function getWeatherData(lat, lon) {
     .then(function (data) {
       updateCurrentWeather(data);
       updateForecast(data);
-      currentWeatherDiv.classList.remove("hidden"); // Show current weather
-      forecastDiv.classList.remove("hidden"); // Show forecast
+      currentWeatherDiv.classList.remove("hidden");
+      forecastDiv.classList.remove("hidden");
     });
 }
 
@@ -50,35 +50,16 @@ function updateCurrentWeather(data) {
   var temperatureK = currentWeather.main.temp;
   var temperatureC = Math.round(temperatureK - 273.15);
 
-  var weatherIcon = `<i class="fas fa-sun"></i>`; // Default icon (sun)
-
-  // Get the weather condition code
-  var weatherCode = currentWeather.weather[0].id;
-
-  // Assign appropriate weather icon based on the condition code
-  if (weatherCode >= 200 && weatherCode <= 232) {
-    weatherIcon = `<i class="fas fa-bolt"></i>`; // Thunderstorm
-  } else if (weatherCode >= 300 && weatherCode <= 321) {
-    weatherIcon = `<i class="fas fa-cloud-rain"></i>`; // Drizzle
-  } else if (weatherCode >= 500 && weatherCode <= 531) {
-    weatherIcon = `<i class="fas fa-cloud-showers-heavy"></i>`; // Rain
-  } else if (weatherCode >= 600 && weatherCode <= 622) {
-    weatherIcon = `<i class="fas fa-snowflake"></i>`; // Snow
-  } else if (weatherCode >= 701 && weatherCode <= 781) {
-    weatherIcon = `<i class="fas fa-smog"></i>`; // Atmosphere
-  } else if (weatherCode === 800) {
-    weatherIcon = `<i class="fas fa-sun"></i>`; // Clear sky
-  } else if (weatherCode >= 801 && weatherCode <= 804) {
-    weatherIcon = `<i class="fas fa-cloud"></i>`; // Clouds
-  }
+  // Determine weather icon based on weather condition code
+  var weatherIcon = getWeatherIcon(currentWeather.weather[0].id);
 
   var currentWeatherHtml = `
-      <h2>${data.city.name} (${new Date().toLocaleDateString()})</h2>
-      <p>${weatherIcon}</p>
-      <p>Temp: ${temperatureC} &#8451;</p>
-      <p>Wind: ${currentWeather.wind.speed} km/h</p>
-      <p>Humidity: ${currentWeather.main.humidity}%</p>
-    `;
+    <h2>${data.city.name} (${new Date().toLocaleDateString()})</h2>
+    <p>${weatherIcon}</p>
+    <p>Temp: ${temperatureC} &#8451;</p>
+    <p>Wind: ${currentWeather.wind.speed} km/h</p>
+    <p>Humidity: ${currentWeather.main.humidity}%</p>
+  `;
 
   currentWeatherDiv.innerHTML = currentWeatherHtml;
 }
@@ -109,39 +90,43 @@ function updateForecast(data) {
     var temperatureK = dailyData.main.temp;
     var temperatureC = Math.round(temperatureK - 273.15);
 
-    var weatherIcon = `<i class="fas fa-sun"></i>`; // Default icon (sun)
-
-    // Get the weather condition code
-    var weatherCode = dailyData.weather[0].id;
-
-    // Assign appropriate weather icon based on the condition code
-    if (weatherCode >= 200 && weatherCode <= 232) {
-      weatherIcon = `<i class="fas fa-bolt"></i>`; // Thunderstorm
-    } else if (weatherCode >= 300 && weatherCode <= 321) {
-      weatherIcon = `<i class="fas fa-cloud-rain"></i>`; // Drizzle
-    } else if (weatherCode >= 500 && weatherCode <= 531) {
-      weatherIcon = `<i class="fas fa-cloud-showers-heavy"></i>`; // Rain
-    } else if (weatherCode >= 600 && weatherCode <= 622) {
-      weatherIcon = `<i class="fas fa-snowflake"></i>`; // Snow
-    } else if (weatherCode >= 701 && weatherCode <= 781) {
-      weatherIcon = `<i class="fas fa-smog"></i>`; // Atmosphere
-    } else if (weatherCode === 800) {
-      weatherIcon = `<i class="fas fa-sun"></i>`; // Clear sky
-    } else if (weatherCode >= 801 && weatherCode <= 804) {
-      weatherIcon = `<i class="fas fa-cloud"></i>`; // Clouds
-    }
+    // Determine weather icon based on weather condition code
+    var weatherIcon = getWeatherIcon(dailyData.weather[0].id);
 
     forecastHtml += `
-        <div class="col-sm-6 col-md-4 col-lg-2">
+      <div class="col-sm-6 col-md-4 col-lg-2">
+        <div class="card forecast-card">
           <h3>${date.toLocaleDateString()}</h3>
           <p>${weatherIcon}</p>
           <p>Temp: ${temperatureC} &#8451;</p>
           <p>Wind: ${dailyData.wind.speed} km/h</p>
           <p>Humidity: ${dailyData.main.humidity}%</p>
         </div>
-      `;
+      </div>
+    `;
   }
 
   forecastHtml += "</div>";
   forecastDiv.innerHTML = forecastHtml;
+}
+
+// Get the weather icon based on weather condition code
+function getWeatherIcon(weatherCode) {
+  if (weatherCode >= 200 && weatherCode <= 232) {
+    return '<i class="fas fa-bolt"></i>'; // Thunderstorm
+  } else if (weatherCode >= 300 && weatherCode <= 321) {
+    return '<i class="fas fa-cloud-rain"></i>'; // Drizzle
+  } else if (weatherCode >= 500 && weatherCode <= 531) {
+    return '<i class="fas fa-cloud-showers-heavy"></i>'; // Rain
+  } else if (weatherCode >= 600 && weatherCode <= 622) {
+    return '<i class="fas fa-snowflake"></i>'; // Snow
+  } else if (weatherCode >= 701 && weatherCode <= 781) {
+    return '<i class="fas fa-smog"></i>'; // Atmosphere
+  } else if (weatherCode === 800) {
+    return '<i class="fas fa-sun"></i>'; // Clear sky
+  } else if (weatherCode >= 801 && weatherCode <= 804) {
+    return '<i class="fas fa-cloud"></i>'; // Clouds
+  } else {
+    return '<i class="fas fa-question"></i>'; // Unknown condition
+  }
 }
