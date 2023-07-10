@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -28,7 +29,7 @@
                 placeholder="Enter a city" />
               <div class="input-group-append">
                 <button
-                  class="btn btn-outline-secondary"
+                  class="btn btn-outline-primary"
                   type="button"
                   id="search-button">
                   Search
@@ -42,7 +43,7 @@
       <section id="current-weather" class="hidden">
         <div class="row">
           <div class="col-lg-6 mb-4">
-            <div class="card">
+            <div class="card bg-primary text-white">
               <div class="card-body"></div>
             </div>
           </div>
@@ -52,9 +53,7 @@
       <section id="forecast" class="hidden">
         <div class="row">
           <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body"></div>
-            </div>
+            <div class="card-deck"></div>
           </div>
         </div>
       </section>
