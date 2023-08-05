@@ -31,7 +31,7 @@ N/A
 ## Usage
 
 ![Screenshot of Home Page](./assets/imgs/screenshot.jpeg?raw=true "Screenshot of Website")
-[Link to Application](https://vinoshan.github.io/Challenge-6-Weather/)
+[Link to Application](https://vinoshan.github.io/Weather/)
 
 ## Contributing
 
