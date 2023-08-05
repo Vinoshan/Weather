@@ -1,4 +1,4 @@
-# Challenge-6-Weather
+# Weather
 
 A simple weather dashboard application that provides current weather information and a 5-day forecast for a given city.
 
